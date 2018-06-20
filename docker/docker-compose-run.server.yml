@@ -1,0 +1,33 @@
+version: '3'
+services:
+  php:
+    container_name: wanzhong-php
+    build: ./
+    volumes:
+      - ../src:/var/www/html
+      - ../src/docker.env:/var/www/html/.env
+      - /data/wanzhong/volumes/logs:/var/www/html/storage/logs
+      - /data/wanzhong/volumes/storage:/var/www/html/storage
+      - /data/wanzhong/volumes/upload:/var/www/html/public/upload
+      - /data/wanzhong/volumes/vendor:/var/www/html/vendor
+      - /data/wanzhong/nginx/log:/var/log/nginx
+      - ./php.ini:/usr/local/etc/php/conf.d/custom.ini
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - "8312:80"
+
+  db:
+    container_name: wanzhong-mysql
+    image: mysql
+    volumes:
+      - /data/wanzhong/mysql/data:/var/lib/mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=NuwJYK4s4MGpbZ
+      - MYSQL_DATABASE=wanzhong
+      - MYSQL_USER=wanzhong
+      - MYSQL_PASSWORD=AFrokRANYodgYqfdnCpHc4RV
+      - TZ=Asia/Shanghai
+    ports:
+      - 6678:3306

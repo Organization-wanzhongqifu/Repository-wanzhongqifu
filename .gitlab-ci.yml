@@ -1,0 +1,44 @@
+stages:
+  - stop
+  - build
+  - start
+
+docker-compose-stop:
+  script:
+    - docker-compose  -f docker/docker-compose-run.server.yml -p wanzhong stop
+  only:
+    - staging
+  stage: stop
+  allow_failure: true
+  variables:
+    GIT_STRATEGY: none
+
+docker-compose-build:
+  script:
+    - docker-compose  -f docker/docker-compose-build.server.yml -p wanzhong up --build --abort-on-container-exit
+    - docker-compose  -f docker/docker-compose-build.server.yml -p wanzhong stop
+    - chown -R www-data:www-data /data/wanzhong
+    - chown -R www-data:www-data ./
+  only:
+    - staging
+  stage: build
+  
+
+docker-compose-up:
+  script:
+    - docker-compose  -f docker/docker-compose-run.server.yml -p wanzhong up -d
+  only:
+    - staging
+  stage: start
+  variables:
+    GIT_STRATEGY: none
+
+nginx-setting:
+  script:
+    - cp host.nginx.conf /etc/nginx/sites-enabled/wanzhong.conf
+    - service nginx reload
+  only:
+    - staging
+  stage: build
+  variables:
+    GIT_STRATEGY: none
