@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/jquery-1.8.3.min.js"></script>
+	<script src="js/jquery.citys.js"></script>
+	<script src="js/area.js"></script>
+</head>
+<body>
+	<div id="city"> 
+		<select class="prov"></select>  
+		<select class="city"></select> 
+		<select class="dist"></select> 
+	</div>
+	<!-- <div class="city-select">
+            <div class="city-item JS_province" id="cityChina">
+                <select class="form-control" name="" id="">
+                    <option value="10011">北京市</option>
+                </select>
+            </div>
+            <div class="city-item JS_city" id="cityPro">
+                <select class="form-control" name="" id="">
+                    <option value="10011">北京市</option>
+                </select>
+            </div>
+            <div class="city-item JS_district" id="">
+                <select class="form-control" name="" id="">
+                    <option value="10011">北京市</option>
+                </select>
+            </div>
+        </div> -->
+</body>
+</html>
+
+<!-- <script type="text/javascript" src="http://www.ijquery.cn/js/jquery.js"></script>
+<script type="text/javascript" src="http://www.ijquery.cn/js/cityselect/jquery.cityselect.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#city").citySelect({
+			nodata:"none",
+			required:false
+		}); 
+	});
+</script> -->
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="js/jsAdress.js"></script>
+<script>
+	addressInit('prov', 'city', 'dist', '安徽', '合肥市', '蜀山区');
+</script>

@@ -1,0 +1,17 @@
+version: '3'
+services:
+  php:
+    container_name: wanzhong-php
+    build: ./
+    volumes:
+      - ../src:/var/www/html
+      - ../src/docker.env:/var/www/html/.env
+      - /data/wanzhong/volumes/logs:/var/www/html/storage/logs
+      - /data/wanzhong/volumes/storage:/var/www/html/storage
+      - /data/wanzhong/volumes/upload:/var/www/html/public/upload
+      - /data/wanzhong/volumes/vendor:/var/www/html/vendor
+      - /data/wanzhong/nginx/log:/var/log/nginx
+      - ./php.ini:/usr/local/etc/php/conf.d/custom.ini
+    environment:
+      TZ: Asia/Shanghai
+    command: bash -c "chmod 775 setup.sh & ./setup.sh"

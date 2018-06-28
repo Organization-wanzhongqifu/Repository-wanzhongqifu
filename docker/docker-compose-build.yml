@@ -1,0 +1,13 @@
+version: '3'
+services:
+  php:
+    container_name: onenine-php
+    build: ./
+    volumes:
+      - ../src:/var/www/html
+      - ../src/docker.env:/var/www/html/.env
+      - ../volumes/logs:/var/www/html/storage/logs
+      - ../volumes/vendor:/var/www/html/vendor
+    environment:
+      TZ: Asia/Shanghai
+    command: bash -c "chmod 775 setup.sh & ./setup.sh"
